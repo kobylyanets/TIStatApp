@@ -1,0 +1,9 @@
+.idea/
+target/
+
+# Secret data
+secret.properties
+
+TIStatDB.h2.db
+TIStatDB.lock.db
+TIStatDB.trace.db
