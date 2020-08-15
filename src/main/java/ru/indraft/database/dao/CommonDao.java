@@ -3,11 +3,12 @@ package ru.indraft.database.dao;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.support.ConnectionSource;
-import ru.indraft.database.manager.DbManager;
+import ru.indraft.manager.DbManager;
 import ru.indraft.database.model.BaseModel;
 
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.List;
 
 public abstract class CommonDao {
 
@@ -48,6 +49,18 @@ public abstract class CommonDao {
         } finally {
             DbManager.closeConnectionSource();
         }
+    }
+
+    public <T extends BaseModel, I> List<T> queryForAll(Class<T> tClass) {
+        Dao<T,I> dao = getDao(tClass);
+        try {
+            return dao.queryForAll();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            DbManager.closeConnectionSource();
+        }
+        return null;
     }
 
 }

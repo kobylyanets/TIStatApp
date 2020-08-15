@@ -1,7 +1,10 @@
 package ru.indraft.convertor;
 
+import ru.indraft.database.model.InstrumentType;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class InstrumentConvertor {
 
@@ -21,6 +24,10 @@ public class InstrumentConvertor {
         var instrumentDb = new ru.indraft.database.model.Instrument();
         instrumentDb.setFigi(instrument.figi);
         instrumentDb.setTicker(instrument.ticker);
+        instrumentDb.setIsin(instrument.isin);
+        instrumentDb.setName(instrument.name);
+        instrumentDb.setType(InstrumentTypeConvertor.convertToDatabase(instrument.type));
+        instrumentDb.setCurrency(CurrencyConvertor.convertToDatabase(instrument.currency));
         return instrumentDb;
     }
 

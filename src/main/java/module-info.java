@@ -9,5 +9,4 @@ module ru.indraft {
     requires ormlitebuild;
     requires lombok;
     exports ru.indraft;
-    exports ru.indraft.database.model;
 }

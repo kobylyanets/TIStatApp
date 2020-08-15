@@ -1,4 +1,4 @@
-package ru.indraft.database.manager;
+package ru.indraft.manager;
 
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
@@ -16,7 +16,7 @@ public class DbManager {
 
     public static void initDataBase() {
         createConnectionSource();
-        dropTables();
+        // dropTables();
         createTables();
         closeConnectionSource();
     }

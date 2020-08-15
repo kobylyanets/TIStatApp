@@ -1,15 +1,19 @@
 package ru.indraft;
 
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import ru.indraft.database.manager.DbManager;
+import javafx.stage.WindowEvent;
+import ru.indraft.manager.DbManager;
+import ru.indraft.manager.OpenApiManager;
 import ru.indraft.service.LocaleService;
-import ru.indraft.service.TinkoffApiService;
+import ru.indraft.service.OpenApiService;
 
 
 /**
@@ -22,12 +26,13 @@ public class App extends Application {
     }
 
     private void handleSynchronize() {
-        TinkoffApiService tinkoffApiService = new TinkoffApiService();
+        OpenApiService tinkoffApiService = new OpenApiService();
         tinkoffApiService.synchronizeStockInstruments();
     }
 
     @Override
     public void start(Stage stage) {
+        initCleanupProcedure();
         DbManager.initDataBase();
         var javaVersion = SystemInfo.javaVersion();
         var javafxVersion = SystemInfo.javafxVersion();
@@ -44,7 +49,23 @@ public class App extends Application {
         var scene = new Scene(new StackPane(vbox), 640, 480);
 
         stage.setScene(scene);
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent windowEvent) {
+                System.out.println("close app");
+                Platform.exit();
+                System.exit(0);
+            }
+        });
         stage.show();
+
+    }
+
+    private static void initCleanupProcedure() {
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            System.out.println("close OpenApi");
+            OpenApiManager.closeOpenApi();
+        }));
     }
 
 }

@@ -4,7 +4,6 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import lombok.Data;
 
-
 @Data
 @DatabaseTable(tableName = "INSTRUMENT")
 public class Instrument implements BaseModel {
@@ -12,8 +11,12 @@ public class Instrument implements BaseModel {
     private String figi;
     @DatabaseField(columnName = "TICKER")
     private String ticker;
-
-    public Instrument() {
-    }
-
+    @DatabaseField
+    private String isin;
+    @DatabaseField
+    private String name;
+    @DatabaseField(unknownEnumName = "Unknown")
+    private InstrumentType type;
+    @DatabaseField(unknownEnumName = "UNKNOWN")
+    private Currency currency;
 }
