@@ -25,9 +25,17 @@ public class App extends Application {
         launch();
     }
 
+    private static void initCleanupProcedure() {
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            System.out.println("close OpenApi");
+            OpenApiManager.closeOpenApi();
+        }));
+    }
+
     private void handleSynchronize() {
         OpenApiService tinkoffApiService = new OpenApiService();
         tinkoffApiService.synchronizeStockInstruments();
+        tinkoffApiService.synchronizeOperations();
     }
 
     @Override
@@ -59,13 +67,6 @@ public class App extends Application {
         });
         stage.show();
 
-    }
-
-    private static void initCleanupProcedure() {
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            System.out.println("close OpenApi");
-            OpenApiManager.closeOpenApi();
-        }));
     }
 
 }

@@ -4,6 +4,7 @@ import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import ru.indraft.database.model.Instrument;
+import ru.indraft.database.model.Operation;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -16,7 +17,7 @@ public class DbManager {
 
     public static void initDataBase() {
         createConnectionSource();
-        // dropTables();
+        dropTables();
         createTables();
         closeConnectionSource();
     }
@@ -39,6 +40,7 @@ public class DbManager {
     public static void createTables() {
         try {
             TableUtils.createTableIfNotExists(connectionSource, Instrument.class);
+            TableUtils.createTableIfNotExists(connectionSource, Operation.class);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -47,6 +49,7 @@ public class DbManager {
     private static void dropTables() {
         try {
             TableUtils.dropTable(connectionSource, Instrument.class, true);
+            TableUtils.dropTable(connectionSource, Operation.class, true);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

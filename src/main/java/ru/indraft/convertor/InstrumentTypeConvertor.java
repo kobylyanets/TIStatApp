@@ -10,6 +10,21 @@ public class InstrumentTypeConvertor {
         } catch (IllegalArgumentException throwables) {
             throwables.printStackTrace();
             return ru.indraft.database.model.InstrumentType.Unknown;
+        } catch (NullPointerException nullPointerException) {
+            return ru.indraft.database.model.InstrumentType.Unknown;
+        }
+    }
+
+    public static ru.indraft.database.model.InstrumentType convertToDatabase(
+            ru.tinkoff.invest.openapi.models.portfolio.InstrumentType instrumentType
+    ) {
+        try {
+            return ru.indraft.database.model.InstrumentType.valueOf(instrumentType.name());
+        } catch (IllegalArgumentException throwables) {
+            throwables.printStackTrace();
+            return ru.indraft.database.model.InstrumentType.Unknown;
+        } catch (NullPointerException nullPointerException) {
+            return ru.indraft.database.model.InstrumentType.Unknown;
         }
     }
 
