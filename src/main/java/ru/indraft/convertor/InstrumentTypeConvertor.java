@@ -7,7 +7,7 @@ public class InstrumentTypeConvertor {
     ) {
         try {
             return ru.indraft.database.model.InstrumentType.valueOf(instrumentType.name());
-        } catch(IllegalArgumentException throwables) {
+        } catch (IllegalArgumentException throwables) {
             throwables.printStackTrace();
             return ru.indraft.database.model.InstrumentType.Unknown;
         }

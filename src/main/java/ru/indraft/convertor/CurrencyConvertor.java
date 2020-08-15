@@ -1,7 +1,5 @@
 package ru.indraft.convertor;
 
-import ru.indraft.database.model.Currency;
-
 public class CurrencyConvertor {
 
     public static ru.indraft.database.model.Currency convertToDatabase(
@@ -9,11 +7,11 @@ public class CurrencyConvertor {
     ) {
         try {
             return ru.indraft.database.model.Currency.valueOf(currency.name());
-        } catch(IllegalArgumentException throwables) {
+        } catch (IllegalArgumentException throwables) {
             throwables.printStackTrace();
-            return Currency.UNKNOWN;
+            return ru.indraft.database.model.Currency.UNKNOWN;
         } catch (NullPointerException nullPointerException) {
-            return Currency.UNKNOWN;
+            return ru.indraft.database.model.Currency.UNKNOWN;
         }
     }
 
