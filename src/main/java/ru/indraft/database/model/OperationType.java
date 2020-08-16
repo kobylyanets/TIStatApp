@@ -21,6 +21,5 @@ public enum OperationType {
     Coupon,
     Dividend,
     SecurityIn,
-    SecurityOut,
-    Unknown;
+    SecurityOut;
 }

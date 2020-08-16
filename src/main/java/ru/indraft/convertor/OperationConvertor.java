@@ -24,9 +24,9 @@ public class OperationConvertor {
         ru.indraft.database.model.Operation operationDb = new ru.indraft.database.model.Operation();
         operationDb.setId(operation.id);
 
-        operationDb.setStatus(OperationStatusConvertor.convertToDatabase(operation.status));
+        operationDb.setStatus(OperationStatusConvertor.toDatabase(operation.status));
 
-        operationDb.setCurrency(CurrencyConvertor.convertToDatabase(operation.currency));
+        operationDb.setCurrency(CurrencyConvertor.toDatabase(operation.currency));
 
         operationDb.setPayment(operation.payment);
 
@@ -38,13 +38,13 @@ public class OperationConvertor {
         instrumentDb.setFigi(operation.figi);
         operationDb.setInstrument(instrumentDb);
 
-        operationDb.setInstrumentType(InstrumentTypeConvertor.convertToDatabase(operation.instrumentType));
+        operationDb.setInstrumentType(InstrumentTypeConvertor.toDatabase(operation.instrumentType));
 
         operationDb.setMarginCall(operation.isMarginCall);
 
         operationDb.setDate(Date.from(operation.date.toInstant()));
 
-        operationDb.setOperationType(OperationTypeConvertor.convertToDatabase(operation.operationType));
+        operationDb.setOperationType(OperationTypeConvertor.toDatabase(operation.operationType));
 
         return operationDb;
     }

@@ -1,18 +1,16 @@
 package ru.indraft.convertor;
 
+import static ru.indraft.utils.ConvertUtils.convertEnum;
+
 public class CurrencyConvertor {
 
-    public static ru.indraft.database.model.Currency convertToDatabase(
+    public static ru.indraft.database.model.Currency toDatabase(
             ru.tinkoff.invest.openapi.models.Currency currency
     ) {
-        try {
-            return ru.indraft.database.model.Currency.valueOf(currency.name());
-        } catch (IllegalArgumentException throwables) {
-            throwables.printStackTrace();
-            return ru.indraft.database.model.Currency.UNKNOWN;
-        } catch (NullPointerException nullPointerException) {
-            return ru.indraft.database.model.Currency.UNKNOWN;
-        }
+        return convertEnum(
+                ru.indraft.database.model.Currency.class,
+                currency
+        );
     }
 
 }

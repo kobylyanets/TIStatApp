@@ -15,8 +15,8 @@ public class Instrument implements BaseModel {
     private String isin;
     @DatabaseField
     private String name;
-    @DatabaseField(unknownEnumName = "Unknown")
+    @DatabaseField
     private InstrumentType type;
-    @DatabaseField(unknownEnumName = "UNKNOWN")
+    @DatabaseField
     private Currency currency;
 }

@@ -1,31 +1,24 @@
 package ru.indraft.convertor;
 
+import static ru.indraft.utils.ConvertUtils.convertEnum;
+
 public class InstrumentTypeConvertor {
 
-    public static ru.indraft.database.model.InstrumentType convertToDatabase(
+    public static ru.indraft.database.model.InstrumentType toDatabase(
             ru.tinkoff.invest.openapi.models.market.InstrumentType instrumentType
     ) {
-        try {
-            return ru.indraft.database.model.InstrumentType.valueOf(instrumentType.name());
-        } catch (IllegalArgumentException throwables) {
-            throwables.printStackTrace();
-            return ru.indraft.database.model.InstrumentType.Unknown;
-        } catch (NullPointerException nullPointerException) {
-            return ru.indraft.database.model.InstrumentType.Unknown;
-        }
+        return convertEnum(
+                ru.indraft.database.model.InstrumentType.class,
+                instrumentType
+        );
     }
 
-    public static ru.indraft.database.model.InstrumentType convertToDatabase(
+    public static ru.indraft.database.model.InstrumentType toDatabase(
             ru.tinkoff.invest.openapi.models.portfolio.InstrumentType instrumentType
     ) {
-        try {
-            return ru.indraft.database.model.InstrumentType.valueOf(instrumentType.name());
-        } catch (IllegalArgumentException throwables) {
-            throwables.printStackTrace();
-            return ru.indraft.database.model.InstrumentType.Unknown;
-        } catch (NullPointerException nullPointerException) {
-            return ru.indraft.database.model.InstrumentType.Unknown;
-        }
+        return convertEnum(
+                ru.indraft.database.model.InstrumentType.class,
+                instrumentType
+        );
     }
-
 }

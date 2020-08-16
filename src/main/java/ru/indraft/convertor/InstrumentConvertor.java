@@ -23,8 +23,8 @@ public class InstrumentConvertor {
         instrumentDb.setTicker(instrument.ticker);
         instrumentDb.setIsin(instrument.isin);
         instrumentDb.setName(instrument.name);
-        instrumentDb.setType(InstrumentTypeConvertor.convertToDatabase(instrument.type));
-        instrumentDb.setCurrency(CurrencyConvertor.convertToDatabase(instrument.currency));
+        instrumentDb.setType(InstrumentTypeConvertor.toDatabase(instrument.type));
+        instrumentDb.setCurrency(CurrencyConvertor.toDatabase(instrument.currency));
         return instrumentDb;
     }
 

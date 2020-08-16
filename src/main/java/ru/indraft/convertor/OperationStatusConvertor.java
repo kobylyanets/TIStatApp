@@ -1,16 +1,16 @@
 package ru.indraft.convertor;
 
+import static ru.indraft.utils.ConvertUtils.convertEnum;
+
 public class OperationStatusConvertor {
 
-    public static ru.indraft.database.model.OperationStatus convertToDatabase(
+    public static ru.indraft.database.model.OperationStatus toDatabase(
             ru.tinkoff.invest.openapi.models.operations.OperationStatus operationStatus
     ) {
-        try {
-            return ru.indraft.database.model.OperationStatus.valueOf(operationStatus.name());
-        } catch (IllegalArgumentException throwables) {
-            throwables.printStackTrace();
-            return ru.indraft.database.model.OperationStatus.Unknown;
-        }
+        return convertEnum(
+                ru.indraft.database.model.OperationStatus.class,
+                operationStatus
+        );
     }
 
 }

@@ -4,6 +4,5 @@ public enum InstrumentType {
     Stock,
     Currency,
     Bond,
-    Etf,
-    Unknown;
+    Etf;
 }

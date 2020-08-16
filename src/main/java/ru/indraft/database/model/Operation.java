@@ -15,10 +15,10 @@ public class Operation implements BaseModel {
     @DatabaseField(id = true)
     private String id;
 
-    @DatabaseField(unknownEnumName = "Unknown")
+    @DatabaseField
     private OperationStatus status;
 
-    @DatabaseField(unknownEnumName = "UNKNOWN")
+    @DatabaseField
     private Currency currency;
 
     @DatabaseField(dataType = DataType.BIG_DECIMAL_NUMERIC)
@@ -33,7 +33,7 @@ public class Operation implements BaseModel {
     @DatabaseField(columnName = "figi", foreign = true, foreignAutoRefresh = true)
     private Instrument instrument;
 
-    @DatabaseField(unknownEnumName = "Unknown")
+    @DatabaseField
     private InstrumentType instrumentType;
 
     @DatabaseField(dataType = DataType.BOOLEAN)
@@ -42,6 +42,6 @@ public class Operation implements BaseModel {
     @DatabaseField(dataType = DataType.DATE)
     private Date date;
 
-    @DatabaseField(unknownEnumName = "Unknown")
+    @DatabaseField
     private OperationType operationType;
 }
