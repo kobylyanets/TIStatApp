@@ -4,11 +4,7 @@ import javafx.fxml.FXML;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.indraft.database.dao.OperationDao;
-import ru.indraft.database.model.Operation;
-import ru.indraft.database.model.OperationType;
-
-import java.math.BigDecimal;
-import java.util.stream.Collectors;
+import ru.indraft.service.CommonStatService;
 
 public class CommonStatTabController {
 
@@ -16,11 +12,8 @@ public class CommonStatTabController {
 
     private void loadCommonStat() {
         var dao = new OperationDao();
-        var list = dao.queryForAll();
-        LOGGER.info("size: {}",list.size());
-        var margin = list.stream().filter(operation -> operation.getOperationType() == OperationType.MarginCommission).collect(Collectors.toList());
-        LOGGER.info("margin: {}", margin);
-        margin.stream().map(Operation::getPayment).reduce(BigDecimal.ZERO, BigDecimal::add).toPlainString();
+        var operations = dao.queryForAll();
+        LOGGER.info("MARGIN COMMISSION: {}", CommonStatService.getMarginCommission(operations));
     }
 
     @FXML
