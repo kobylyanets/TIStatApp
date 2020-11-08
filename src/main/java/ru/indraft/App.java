@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.indraft.manager.DbManager;
 import ru.indraft.manager.OpenApiManager;
+import ru.indraft.service.LocaleService;
 import ru.indraft.utils.FxmlUtils;
 
 /**
@@ -41,6 +42,7 @@ public class App extends Application {
             scene = new Scene(borderPane);
         }
         stage.setScene(scene);
+        stage.setTitle(LocaleService.getInstance().get("page.stat.title"));
         stage.setOnCloseRequest(windowEvent -> {
             LOGGER.trace("close app");
             Platform.exit();
