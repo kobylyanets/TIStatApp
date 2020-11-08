@@ -21,7 +21,7 @@ public class DbManager {
 
     public static void initDataBase() {
         createConnectionSource();
-        dropTables();
+//        dropTables();
         createTables();
         closeConnectionSource();
     }
