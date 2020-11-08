@@ -8,6 +8,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.indraft.manager.DbManager;
 import ru.indraft.manager.OpenApiManager;
 import ru.indraft.service.LocaleService;
@@ -20,6 +22,8 @@ import ru.indraft.utils.FxmlUtils;
  */
 public class App extends Application {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(Application.class);
+
     private static final String MAIN_WINDOW_PATH = "/views/Main.fxml";
 
     public static void main(String[] args) {
@@ -28,7 +32,7 @@ public class App extends Application {
 
     private static void initCleanupProcedure() {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            System.out.println("close OpenApi");
+            LOGGER.trace("close OpenApi");
             OpenApiManager.closeOpenApi();
         }));
     }
@@ -54,7 +58,6 @@ public class App extends Application {
         var btn = new Button(LocaleService.getInstance().get("settings.button.title"));
         btn.setOnAction(actionEvent -> handleSynchronize());
         vbox.getChildren().add(btn);
-        // var scene = new Scene(new StackPane(vbox), 640, 480);
 
         BorderPane borderPane = FxmlUtils.loadView(MAIN_WINDOW_PATH);
         Scene scene = null;
@@ -63,12 +66,11 @@ public class App extends Application {
         }
         stage.setScene(scene);
         stage.setOnCloseRequest(windowEvent -> {
-            System.out.println("close app");
+            LOGGER.trace("close app");
             Platform.exit();
             System.exit(0);
         });
         stage.show();
-
     }
 
 }

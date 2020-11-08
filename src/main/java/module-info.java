@@ -10,5 +10,7 @@ module ru.indraft {
     requires java.sql;
     requires ormlitebuild;
     requires lombok;
+    requires slf4j.api;
+    requires slf4j.log4j12;
     exports ru.indraft;
 }

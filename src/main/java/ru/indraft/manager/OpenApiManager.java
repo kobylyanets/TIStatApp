@@ -1,5 +1,6 @@
 package ru.indraft.manager;
 
+import org.slf4j.LoggerFactory;
 import ru.indraft.service.OpenApiService;
 import ru.tinkoff.invest.openapi.OpenApi;
 import ru.tinkoff.invest.openapi.okhttp.OkHttpOpenApiFactory;
@@ -10,10 +11,12 @@ import java.util.logging.Logger;
 
 public class OpenApiManager {
 
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(OpenApiManager.class);
+
     private static final String TOKEN_KEY = "tinkoff.invest.openapi.token";
     private static final String SANDBOX_TOKEN_KEY = "tinkoff.invest.openapi.sandbox.token";
 
-    private static final Logger logger = Logger.getLogger(OpenApiService.class.getName());
+    private static final Logger ApiLogger = Logger.getLogger(OpenApiService.class.getName());
     private static OpenApi api;
 
     private static ResourceBundle getSecretResourceBundle() {
@@ -36,7 +39,7 @@ public class OpenApiManager {
     }
 
     private static OpenApi createOpenApi() {
-        var factory = new OkHttpOpenApiFactory(getToken(), logger);
+        var factory = new OkHttpOpenApiFactory(getToken(), ApiLogger);
         return factory.createOpenApiClient(Executors.newSingleThreadExecutor());
     }
 
@@ -45,7 +48,7 @@ public class OpenApiManager {
             try {
                 api.close();
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.error(e.getLocalizedMessage());
             }
         }
     }

@@ -3,6 +3,8 @@ package ru.indraft.manager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.indraft.database.model.Instrument;
 import ru.indraft.database.model.Operation;
 
@@ -10,6 +12,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class DbManager {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(DbManager.class);
 
     private static final String DATA_BASE_URL = "jdbc:h2:./TIStatDB";
 
@@ -25,8 +29,8 @@ public class DbManager {
     private static void createConnectionSource() {
         try {
             connectionSource = new JdbcConnectionSource(DATA_BASE_URL);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            LOGGER.error(e.getLocalizedMessage());
         }
     }
 
@@ -41,8 +45,8 @@ public class DbManager {
         try {
             TableUtils.createTableIfNotExists(connectionSource, Instrument.class);
             TableUtils.createTableIfNotExists(connectionSource, Operation.class);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            LOGGER.error(e.getLocalizedMessage());
         }
     }
 
@@ -50,8 +54,8 @@ public class DbManager {
         try {
             TableUtils.dropTable(connectionSource, Instrument.class, true);
             TableUtils.dropTable(connectionSource, Operation.class, true);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            LOGGER.error(e.getLocalizedMessage());
         }
     }
 
@@ -60,7 +64,7 @@ public class DbManager {
             try {
                 connectionSource.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                LOGGER.error(e.getLocalizedMessage());
             }
         }
     }

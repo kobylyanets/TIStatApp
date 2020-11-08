@@ -1,6 +1,7 @@
 package ru.indraft.service;
 
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.indraft.convertor.InstrumentConvertor;
 import ru.indraft.convertor.OperationConvertor;
 import ru.indraft.database.dao.InstrumentDao;
@@ -15,6 +16,8 @@ import ru.tinkoff.invest.openapi.models.operations.OperationStatus;
 import java.util.stream.Collectors;
 
 public class OpenApiService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(OpenApiService.class);
 
     public void synchronizeStockInstruments() {
         InstrumentDao instrumentDao = new InstrumentDao();
@@ -45,6 +48,6 @@ public class OpenApiService {
                 Operation.class
         );
         var list = operationDao.queryForAll(Operation.class);
-        System.out.println(filteredOperations.size());
+        LOGGER.info("FILTERED OPERATIONS SIZE {}:", filteredOperations.size());
     }
 }
