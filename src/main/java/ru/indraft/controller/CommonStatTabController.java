@@ -16,7 +16,7 @@ public class CommonStatTabController {
 
     private void loadCommonStat() {
         var dao = new OperationDao();
-        var list = dao.queryForAll(Operation.class);
+        var list = dao.queryForAll();
         LOGGER.info("size: {}",list.size());
         var margin = list.stream().filter(operation -> operation.getOperationType() == OperationType.MarginCommission).collect(Collectors.toList());
         LOGGER.info("margin: {}", margin);

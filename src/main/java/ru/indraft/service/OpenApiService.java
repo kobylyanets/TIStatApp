@@ -6,8 +6,6 @@ import ru.indraft.convertor.InstrumentConvertor;
 import ru.indraft.convertor.OperationConvertor;
 import ru.indraft.database.dao.InstrumentDao;
 import ru.indraft.database.dao.OperationDao;
-import ru.indraft.database.model.Instrument;
-import ru.indraft.database.model.Operation;
 import ru.indraft.manager.OpenApiManager;
 import ru.indraft.utils.DateUtils;
 import ru.tinkoff.invest.openapi.models.market.InstrumentsList;
@@ -22,7 +20,9 @@ public class OpenApiService {
     public void synchronizeStockInstruments() {
         InstrumentDao instrumentDao = new InstrumentDao();
         InstrumentsList instrumentList = OpenApiManager.getOpenApi().getMarketContext().getMarketStocks().join();
-        instrumentDao.createOrUpdate(InstrumentConvertor.convertToDatabase(instrumentList.instruments), Instrument.class);
+        instrumentDao.createOrUpdate(
+                InstrumentConvertor.convertToDatabase(instrumentList.instruments)
+        );
     }
 
     public void synchronizeOperations() {
@@ -44,10 +44,8 @@ public class OpenApiService {
                         .collect(Collectors.toList());
         OperationDao operationDao = new OperationDao();
         operationDao.createOrUpdate(
-                OperationConvertor.convertToDatabase(filteredOperations),
-                Operation.class
+                OperationConvertor.convertToDatabase(filteredOperations)
         );
-        var list = operationDao.queryForAll(Operation.class);
         LOGGER.info("FILTERED OPERATIONS SIZE {}:", filteredOperations.size());
     }
 }

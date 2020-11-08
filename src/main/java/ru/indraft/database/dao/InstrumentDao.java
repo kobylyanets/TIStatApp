@@ -1,4 +1,9 @@
 package ru.indraft.database.dao;
 
-public class InstrumentDao extends CommonDao {
+import ru.indraft.database.model.Instrument;
+
+public class InstrumentDao extends CommonDao<Instrument> {
+    public InstrumentDao() {
+        super(Instrument.class);
+    }
 }

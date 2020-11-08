@@ -5,34 +5,35 @@ import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.support.ConnectionSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.indraft.database.model.BaseModel;
 import ru.indraft.manager.DbManager;
 
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
 
-public abstract class CommonDao {
+public abstract class CommonDao<T> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CommonDao.class);
+    private final Class<T> tClass;
 
     protected ConnectionSource connectionSource;
 
-    public CommonDao() {
+    public CommonDao(Class<T> tClass) {
         this.connectionSource = DbManager.getConnectionSource();
+        this.tClass = tClass;
     }
 
-    public <T extends BaseModel, I> Dao<T, I> getDao(Class<T> clazz) {
+    public Dao<T, ?> getDao() {
         try {
-            return DaoManager.createDao(connectionSource, clazz);
+            return DaoManager.createDao(connectionSource, tClass);
         } catch (SQLException e) {
             LOGGER.error(e.getLocalizedMessage());
         }
         return null;
     }
 
-    public <T extends BaseModel, I> void createOrUpdate(T model, Class<T> tClass) {
-        Dao<T, I> dao = getDao(tClass);
+    public void createOrUpdate(T model) {
+        var dao = getDao();
         try {
             dao.createOrUpdate(model);
         } catch (SQLException e) {
@@ -42,8 +43,8 @@ public abstract class CommonDao {
         }
     }
 
-    public <T extends BaseModel, I> void createOrUpdate(Collection<T> models, Class<T> tClass) {
-        Dao<T, I> dao = getDao(tClass);
+    public void createOrUpdate(Collection<T> models) {
+        var dao = getDao();
         try {
             for (var model : models) {
                 dao.createOrUpdate(model);
@@ -55,8 +56,8 @@ public abstract class CommonDao {
         }
     }
 
-    public <T extends BaseModel, I> List<T> queryForAll(Class<T> tClass) {
-        Dao<T, I> dao = getDao(tClass);
+    public List<T> queryForAll() {
+        var dao = getDao();
         try {
             return dao.queryForAll();
         } catch (SQLException e) {
