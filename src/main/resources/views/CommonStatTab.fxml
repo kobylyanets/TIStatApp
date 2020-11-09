@@ -16,12 +16,14 @@
                 <Button mnemonicParsing="false" onAction="#refresh" text="%page.stat.btn.refresh"/>
             </items>
         </ToolBar>
-        <TableView VBox.vgrow="ALWAYS">
+        <TableView fx:id="statTableView" VBox.vgrow="ALWAYS">
             <columns>
-                <TableColumn editable="false" maxWidth="-1.0" minWidth="200.0" prefWidth="-1.0"
-                             sortable="false" text="name"/>
-                <TableColumn editable="false" maxWidth="-1.0" minWidth="500.0" prefWidth="-1.0"
-                             sortable="false" text="value"/>
+                <TableColumn fx:id="parameterColumn" editable="false" maxWidth="-1.0"
+                             minWidth="350.0" prefWidth="-1.0" sortable="false"
+                             text="%page.stat.table.column.parameter"/>
+                <TableColumn fx:id="valueColumn" editable="false" maxWidth="-1.0" minWidth="250.0"
+                             prefWidth="-1.0" sortable="false"
+                             text="%page.stat.table.column.value"/>
             </columns>
             <opaqueInsets>
                 <Insets/>

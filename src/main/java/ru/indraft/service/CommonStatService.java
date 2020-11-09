@@ -9,7 +9,7 @@ import java.util.Objects;
 
 public class CommonStatService {
 
-    public static Double getMarginCommission(List<Operation> operations) {
+    public static Double getMarginCommissionSum(List<Operation> operations) {
         return operations.stream()
                 .filter(operation -> operation.getOperationType() == OperationType.MarginCommission)
                 .map(Operation::getPayment)

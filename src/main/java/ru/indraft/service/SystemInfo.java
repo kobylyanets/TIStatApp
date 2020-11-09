@@ -1,4 +1,4 @@
-package ru.indraft;
+package ru.indraft.service;
 
 public class SystemInfo {
 
