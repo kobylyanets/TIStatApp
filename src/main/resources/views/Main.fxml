@@ -12,6 +12,7 @@
         <ToolBar nodeOrientation="LEFT_TO_RIGHT" BorderPane.alignment="CENTER">
             <items>
                 <Button mnemonicParsing="false" text="%page.stat.title"/>
+                <Button mnemonicParsing="false" text="%page.operationsStat.title"/>
                 <Separator nodeOrientation="RIGHT_TO_LEFT" orientation="VERTICAL" prefHeight="27.0"
                            prefWidth="8.0"/>
                 <Button mnemonicParsing="false" onAction="#handleSynchronize"

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.VBox?>
+<VBox alignment="TOP_CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+      prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="ru.indraft.controller.OperationsStatTabController">
+    <children>
+        <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0"
+                 VBox.vgrow="ALWAYS">
+            <items>
+                <Button mnemonicParsing="false" onAction="#refresh"
+                        text="%page.operationsStat.btn.refresh"/>
+            </items>
+        </ToolBar>
+        <TableView fx:id="operationsStatTableView" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="tickerColumn" editable="false" maxWidth="-1.0"
+                             minWidth="350.0" prefWidth="-1.0" sortable="false"
+                             text="%page.operationsStat.table.ticker"/>
+                <TableColumn fx:id="profitColumn" editable="false" maxWidth="-1.0" minWidth="250.0"
+                             prefWidth="-1.0" sortable="false"
+                             text="%page.operationsStat.table.profit"/>
+            </columns>
+            <opaqueInsets>
+                <Insets/>
+            </opaqueInsets>
+            <VBox.margin>
+                <Insets/>
+            </VBox.margin>
+        </TableView>
+    </children>
+</VBox>

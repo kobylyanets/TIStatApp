@@ -34,7 +34,6 @@ public class CommonStatTabController {
         populateTable(operations);
     }
 
-    @FXML
     private void populateTable(List<Operation> operations) {
         commonStatFxObservableList.clear();
         CommonStatFx marginCommission = new CommonStatFx();

@@ -33,6 +33,30 @@ public class DateUtils {
         return OffsetDateTime.of(getLocalDateTimeOfFoundationTI(), ZoneOffset.UTC);
     }
 
+    public static OffsetDateTime getOffsetEndTimeOf2016Year() {
+        return OffsetDateTime.of(LocalDateTime.of(
+                LocalDate.parse("01.10.2017", dateFormatter),
+                getStartOfDayTime()), ZoneOffset.UTC);
+    }
+
+    public static OffsetDateTime getOffsetEndTimeOf2017Year() {
+        return OffsetDateTime.of(LocalDateTime.of(
+                LocalDate.parse("01.10.2017", dateFormatter),
+                getStartOfDayTime()), ZoneOffset.UTC);
+    }
+
+    public static OffsetDateTime getOffsetEndTimeOf2018Year() {
+        return OffsetDateTime.of(LocalDateTime.of(
+                LocalDate.parse("01.10.2018", dateFormatter),
+                getStartOfDayTime()), ZoneOffset.UTC);
+    }
+
+    public static OffsetDateTime getOffsetEndTimeOf2019Year() {
+        return OffsetDateTime.of(LocalDateTime.of(
+                LocalDate.parse("01.10.2019", dateFormatter),
+                getStartOfDayTime()), ZoneOffset.UTC);
+    }
+
     public static LocalTime getStartOfDayTime() {
         return LocalTime.parse(START_TIME_OF_DAY, timeFormatter);
     }

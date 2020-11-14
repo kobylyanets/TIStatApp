@@ -13,6 +13,7 @@ public class MainController {
     private static final Logger LOGGER = LoggerFactory.getLogger(MainController.class);
 
     private static final String COMMON_STAT_TAB_PATH = "/views/CommonStatTab.fxml";
+    private static final String OPERATIONS_STAT_TAB_PATH = "/views/OperationsStatTab.fxml";
 
     @FXML
     private BorderPane borderPaneMain;
@@ -26,7 +27,7 @@ public class MainController {
 
     public void initialize() {
         LOGGER.trace("Initialize Main Controller");
-        VBox pageContent = FxmlUtils.loadView(COMMON_STAT_TAB_PATH);
+        VBox pageContent = FxmlUtils.loadView(OPERATIONS_STAT_TAB_PATH);
         borderPaneMain.setCenter(pageContent);
     }
 
