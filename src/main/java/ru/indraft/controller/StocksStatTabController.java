@@ -7,11 +7,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.indraft.database.dao.OperationDao;
-import ru.indraft.database.model.Operation;
 import ru.indraft.model.StockStatFx;
-import ru.indraft.service.CommonStatService;
+import ru.indraft.service.StocksStatService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StocksStatTabController {
@@ -19,6 +18,9 @@ public class StocksStatTabController {
     private static final Logger LOGGER = LoggerFactory.getLogger(StocksStatTabController.class);
 
     private final ObservableList<StockStatFx> stocksStatFxObservableList = FXCollections.observableArrayList();
+
+    private final StocksStatService stocksStatService = new StocksStatService();
+    private List<StockStatFx> stocksStat = new ArrayList<>();
 
     @FXML
     public TableView<StockStatFx> stocksStatTableView;
@@ -47,14 +49,13 @@ public class StocksStatTabController {
     }
 
     private void loadStocksStat() {
-        var dao = new OperationDao();
-        var operations = dao.queryForAll();
-        populateTable(operations);
+        stocksStat = stocksStatService.getStocksStat();
+        populateTable(stocksStat);
     }
 
-    private void populateTable(List<Operation> operations) {
+    private void populateTable(List<StockStatFx> stocksStat) {
         stocksStatFxObservableList.clear();
-        stocksStatFxObservableList.addAll(CommonStatService.getStockStatOperations(operations));
+        stocksStatFxObservableList.addAll(stocksStat);
         stocksStatTableView.setItems(stocksStatFxObservableList);
     }
 
