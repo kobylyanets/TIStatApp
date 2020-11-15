@@ -3,7 +3,7 @@ package ru.indraft.service;
 import ru.indraft.database.model.Instrument;
 import ru.indraft.database.model.Operation;
 import ru.indraft.database.model.OperationType;
-import ru.indraft.model.StockOperationFx;
+import ru.indraft.model.StockStatFx;
 import ru.indraft.utils.MoneyUtils;
 
 import java.math.BigDecimal;
@@ -38,13 +38,13 @@ public class CommonStatService {
                 .filter(instrument -> instrument.getTicker().equals(ticker)).findFirst().orElse(null);
     }
 
-    public static List<StockOperationFx> getStockStatOperations(List<Operation> operations) {
+    public static List<StockStatFx> getStockStatOperations(List<Operation> operations) {
         var tickers = getAllTickers(operations);
-        var list = new ArrayList<StockOperationFx>();
+        var list = new ArrayList<StockStatFx>();
         for (String ticker : tickers) {
             var profit = getTickerProfit(ticker, operations);
             if (profit != null) {
-                var stockOperation = new StockOperationFx();
+                var stockOperation = new StockStatFx();
                 stockOperation.setTicker(ticker);
                 var instrument = findInstrumentByTicker(operations, ticker);
                 stockOperation.setName(instrument.getName());

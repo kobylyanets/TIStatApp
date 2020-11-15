@@ -2,7 +2,7 @@ package ru.indraft.model;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public class StockOperationFx {
+public class StockStatFx {
 
     private final SimpleStringProperty ticker = new SimpleStringProperty();
     private final SimpleStringProperty name = new SimpleStringProperty();

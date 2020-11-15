@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.indraft.database.dao.OperationDao;
 import ru.indraft.database.model.Operation;
-import ru.indraft.model.StockOperationFx;
+import ru.indraft.model.StockStatFx;
 import ru.indraft.service.CommonStatService;
 
 import java.util.List;
@@ -17,12 +17,12 @@ import java.util.List;
 public class OperationsStatTabController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(OperationsStatTabController.class);
-    private final ObservableList<StockOperationFx> operationsStatFxObservableList = FXCollections.observableArrayList();
+    private final ObservableList<StockStatFx> operationsStatFxObservableList = FXCollections.observableArrayList();
 
-    public TableView<StockOperationFx> operationsStatTableView;
-    public TableColumn<StockOperationFx, String> tickerColumn;
-    public TableColumn<StockOperationFx, String> instrumentNameColumn;
-    public TableColumn<StockOperationFx, String> profitColumn;
+    public TableView<StockStatFx> operationsStatTableView;
+    public TableColumn<StockStatFx, String> tickerColumn;
+    public TableColumn<StockStatFx, String> instrumentNameColumn;
+    public TableColumn<StockStatFx, String> profitColumn;
 
     private void populateTable(List<Operation> operations) {
         operationsStatFxObservableList.clear();
