@@ -19,11 +19,17 @@
         </ToolBar>
         <TableView fx:id="operationsStatTableView" VBox.vgrow="ALWAYS">
             <columns>
-                <TableColumn fx:id="tickerColumn" editable="false" maxWidth="-1.0"
-                             minWidth="350.0" prefWidth="-1.0" sortable="false"
+                <TableColumn fx:id="tickerColumn" editable="false" maxWidth="1.7976931348623157E308"
+                             minWidth="80.0" prefWidth="100.0" sortable="false"
+                             style="-fx-alignment: CENTER;"
                              text="%page.operationsStat.table.ticker"/>
-                <TableColumn fx:id="profitColumn" editable="false" maxWidth="-1.0" minWidth="250.0"
-                             prefWidth="-1.0" sortable="false"
+                <TableColumn fx:id="instrumentNameColumn" editable="false"
+                             maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="250.0"
+                             sortable="false" style="-fx-alignment: CENTER_LEFT;"
+                             text="%page.operationsStat.table.instrumentName"/>
+                <TableColumn fx:id="profitColumn" editable="false" maxWidth="1.7976931348623157E308"
+                             minWidth="80.0" prefWidth="120.0" sortable="false"
+                             style="-fx-alignment: CENTER_RIGHT;"
                              text="%page.operationsStat.table.profit"/>
             </columns>
             <opaqueInsets>

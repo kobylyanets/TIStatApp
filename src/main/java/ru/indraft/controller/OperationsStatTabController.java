@@ -21,6 +21,7 @@ public class OperationsStatTabController {
 
     public TableView<StockOperationFx> operationsStatTableView;
     public TableColumn<StockOperationFx, String> tickerColumn;
+    public TableColumn<StockOperationFx, String> instrumentNameColumn;
     public TableColumn<StockOperationFx, String> profitColumn;
 
     private void populateTable(List<Operation> operations) {
@@ -47,6 +48,7 @@ public class OperationsStatTabController {
 
     private void initColumns() {
         tickerColumn.setCellValueFactory(cellData -> cellData.getValue().tickerProperty());
+        instrumentNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         profitColumn.setCellValueFactory(cellData -> cellData.getValue().profitProperty());
     }
 

@@ -47,6 +47,7 @@ public class CommonStatService {
                 var stockOperation = new StockOperationFx();
                 stockOperation.setTicker(ticker);
                 var instrument = findInstrumentByTicker(operations, ticker);
+                stockOperation.setName(instrument.getName());
                 stockOperation.setProfit(MoneyUtils.format(profit, instrument.getCurrency()));
                 list.add(stockOperation);
             }
