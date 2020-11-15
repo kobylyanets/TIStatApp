@@ -21,7 +21,7 @@ public class MainController {
     @FXML
     private void handleSynchronize() {
         OpenApiService tinkoffApiService = new OpenApiService();
-        tinkoffApiService.synchronizeStockInstruments();
+        tinkoffApiService.synchronizeMarketStocks();
         tinkoffApiService.synchronizeOperations();
     }
 

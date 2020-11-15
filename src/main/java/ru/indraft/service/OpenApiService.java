@@ -17,7 +17,7 @@ public class OpenApiService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(OpenApiService.class);
 
-    public void synchronizeStockInstruments() {
+    public void synchronizeMarketStocks() {
         InstrumentDao instrumentDao = new InstrumentDao();
         InstrumentsList instrumentList = OpenApiManager.getOpenApi().getMarketContext().getMarketStocks().join();
         instrumentDao.createOrUpdate(
