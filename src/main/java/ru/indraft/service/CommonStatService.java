@@ -4,6 +4,7 @@ import ru.indraft.database.model.Instrument;
 import ru.indraft.database.model.Operation;
 import ru.indraft.database.model.OperationType;
 import ru.indraft.model.StockOperationFx;
+import ru.indraft.utils.MoneyUtils;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -30,6 +31,13 @@ public class CommonStatService {
                 .collect(Collectors.toSet());
     }
 
+    public static Instrument findInstrumentByTicker(List<Operation> operations, String ticker) {
+        return operations.stream()
+                .map(Operation::getInstrument)
+                .filter(Objects::nonNull)
+                .filter(instrument -> instrument.getTicker().equals(ticker)).findFirst().orElse(null);
+    }
+
     public static List<StockOperationFx> getStockStatOperations(List<Operation> operations) {
         var tickers = getAllTickers(operations);
         var list = new ArrayList<StockOperationFx>();
@@ -38,14 +46,15 @@ public class CommonStatService {
             if (profit != null) {
                 var stockOperation = new StockOperationFx();
                 stockOperation.setTicker(ticker);
-                stockOperation.setProfit(profit.toString());
+                var instrument = findInstrumentByTicker(operations, ticker);
+                stockOperation.setProfit(MoneyUtils.format(profit, instrument.getCurrency()));
                 list.add(stockOperation);
             }
         }
         return list;
     }
 
-    public static Double getTickerProfit(String ticker, List<Operation> operations) {
+    public static BigDecimal getTickerProfit(String ticker, List<Operation> operations) {
         var tickerOperations = operations.stream()
                 .filter(operation -> operation.getInstrument() != null)
                 .filter(operation -> operation.getInstrument().getTicker().equals(ticker))
@@ -61,11 +70,11 @@ public class CommonStatService {
         if (quantityBuy - quantitySell == 0) {
             var buySum = buyOperations.stream()
                     .map(Operation::getPayment)
-                    .reduce(BigDecimal.ZERO, BigDecimal::add).doubleValue();
+                    .reduce(BigDecimal.ZERO, BigDecimal::add).abs();
             var sellSum = sellOperations.stream()
                     .map(Operation::getPayment)
-                    .reduce(BigDecimal.ZERO, BigDecimal::add).doubleValue();
-            return sellSum + buySum;
+                    .reduce(BigDecimal.ZERO, BigDecimal::add).abs();
+            return sellSum.subtract(buySum);
         }
         return null;
     }
