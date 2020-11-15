@@ -13,7 +13,7 @@ public class MainController {
     private static final Logger LOGGER = LoggerFactory.getLogger(MainController.class);
 
     private static final String COMMON_STAT_TAB_PATH = "/views/CommonStatTab.fxml";
-    private static final String OPERATIONS_STAT_TAB_PATH = "/views/OperationsStatTab.fxml";
+    private static final String OPERATIONS_STAT_TAB_PATH = "/views/StocksStatTab.fxml";
 
     @FXML
     private BorderPane borderPaneMain;

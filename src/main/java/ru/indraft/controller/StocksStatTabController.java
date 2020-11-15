@@ -14,9 +14,9 @@ import ru.indraft.service.CommonStatService;
 
 import java.util.List;
 
-public class OperationsStatTabController {
+public class StocksStatTabController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(OperationsStatTabController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(StocksStatTabController.class);
     private final ObservableList<StockStatFx> operationsStatFxObservableList = FXCollections.observableArrayList();
 
     public TableView<StockStatFx> operationsStatTableView;
