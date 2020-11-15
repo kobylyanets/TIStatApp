@@ -17,40 +17,45 @@ import java.util.List;
 public class StocksStatTabController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(StocksStatTabController.class);
-    private final ObservableList<StockStatFx> operationsStatFxObservableList = FXCollections.observableArrayList();
 
-    public TableView<StockStatFx> operationsStatTableView;
+    private final ObservableList<StockStatFx> stocksStatFxObservableList = FXCollections.observableArrayList();
+
+    @FXML
+    public TableView<StockStatFx> stocksStatTableView;
+    @FXML
     public TableColumn<StockStatFx, String> tickerColumn;
-    public TableColumn<StockStatFx, String> instrumentNameColumn;
+    @FXML
+    public TableColumn<StockStatFx, String> nameColumn;
+    @FXML
     public TableColumn<StockStatFx, String> profitColumn;
 
-    private void populateTable(List<Operation> operations) {
-        operationsStatFxObservableList.clear();
-        operationsStatFxObservableList.addAll(CommonStatService.getStockStatOperations(operations));
-        operationsStatTableView.setItems(operationsStatFxObservableList);
+    @FXML
+    private void refresh() {
+        loadStocksStat();
     }
 
-    private void loadCommonStat() {
+    @FXML
+    public void initialize() {
+        initColumns();
+        loadStocksStat();
+    }
+
+    private void initColumns() {
+        tickerColumn.setCellValueFactory(cellData -> cellData.getValue().tickerProperty());
+        nameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+        profitColumn.setCellValueFactory(cellData -> cellData.getValue().profitProperty());
+    }
+
+    private void loadStocksStat() {
         var dao = new OperationDao();
         var operations = dao.queryForAll();
         populateTable(operations);
     }
 
-    @FXML
-    private void refresh() {
-        loadCommonStat();
+    private void populateTable(List<Operation> operations) {
+        stocksStatFxObservableList.clear();
+        stocksStatFxObservableList.addAll(CommonStatService.getStockStatOperations(operations));
+        stocksStatTableView.setItems(stocksStatFxObservableList);
     }
-
-    public void initialize() {
-        initColumns();
-        loadCommonStat();
-    }
-
-    private void initColumns() {
-        tickerColumn.setCellValueFactory(cellData -> cellData.getValue().tickerProperty());
-        instrumentNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
-        profitColumn.setCellValueFactory(cellData -> cellData.getValue().profitProperty());
-    }
-
 
 }

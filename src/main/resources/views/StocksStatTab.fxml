@@ -36,14 +36,14 @@
                         text="%page.operationsStat.btn.refresh"/>
             </items>
         </ToolBar>
-        <TableView fx:id="operationsStatTableView" prefHeight="321.0" prefWidth="600.0"
+        <TableView fx:id="stocksStatTableView" prefHeight="321.0" prefWidth="600.0"
                    VBox.vgrow="ALWAYS">
             <columns>
                 <TableColumn fx:id="tickerColumn" editable="false" maxWidth="1.7976931348623157E308"
                              minWidth="80.0" prefWidth="100.0" sortable="false"
                              style="-fx-alignment: CENTER;"
                              text="%page.operationsStat.table.ticker"/>
-                <TableColumn fx:id="instrumentNameColumn" editable="false"
+                <TableColumn fx:id="nameColumn" editable="false"
                              maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="250.0"
                              sortable="false" style="-fx-alignment: CENTER_LEFT;"
                              text="%page.operationsStat.table.instrumentName"/>
