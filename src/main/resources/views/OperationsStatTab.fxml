@@ -2,22 +2,42 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 <VBox alignment="TOP_CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
       prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="ru.indraft.controller.OperationsStatTabController">
     <children>
-        <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0"
+        <ToolBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="200.0"
                  VBox.vgrow="ALWAYS">
             <items>
+                <Label text="%page.stocksStat.filter.title">
+                    <padding>
+                        <Insets right="20.0"/>
+                    </padding>
+                </Label>
+                <RadioButton mnemonicParsing="false" text="%page.stocksStat.filter.rub">
+                    <toggleGroup>
+                        <ToggleGroup fx:id="tgCurrencyFilter"/>
+                    </toggleGroup>
+                </RadioButton>
+                <RadioButton mnemonicParsing="false" text="%page.stocksStat.filter.usd" toggleGroup="$tgCurrencyFilter"/>
+                <RadioButton mnemonicParsing="false" selected="true" text="%page.stocksStat.filter.all"
+                             toggleGroup="$tgCurrencyFilter"/>
+                <Separator prefWidth="20.0"/>
                 <Button mnemonicParsing="false" onAction="#refresh"
                         text="%page.operationsStat.btn.refresh"/>
             </items>
         </ToolBar>
-        <TableView fx:id="operationsStatTableView" VBox.vgrow="ALWAYS">
+        <TableView fx:id="operationsStatTableView" prefHeight="321.0" prefWidth="600.0"
+                   VBox.vgrow="ALWAYS">
             <columns>
                 <TableColumn fx:id="tickerColumn" editable="false" maxWidth="1.7976931348623157E308"
                              minWidth="80.0" prefWidth="100.0" sortable="false"
@@ -39,5 +59,28 @@
                 <Insets/>
             </VBox.margin>
         </TableView>
+        <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0">
+            <items>
+                <Label text="0.00">
+                    <opaqueInsets>
+                        <Insets/>
+                    </opaqueInsets>
+                    <padding>
+                        <Insets left="20.0"/>
+                    </padding>
+                </Label>
+                <Separator orientation="VERTICAL" prefHeight="20.0" prefWidth="10.0"/>
+                <Label text="0.00"/>
+                <Separator orientation="VERTICAL" prefHeight="20.0" prefWidth="10.0"/>
+                <Label alignment="CENTER_RIGHT" text="%page.stocksStat.total.title">
+                    <font>
+                        <Font name="System Bold" size="13.0"/>
+                    </font>
+                </Label>
+            </items>
+            <opaqueInsets>
+                <Insets/>
+            </opaqueInsets>
+        </ToolBar>
     </children>
 </VBox>
