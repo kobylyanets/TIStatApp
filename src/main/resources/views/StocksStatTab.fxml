@@ -61,7 +61,7 @@
         </TableView>
         <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0">
             <items>
-                <Label text="0.00">
+                <Label fx:id="totalSumInUSDLabel" text="0.00">
                     <opaqueInsets>
                         <Insets/>
                     </opaqueInsets>
@@ -70,7 +70,7 @@
                     </padding>
                 </Label>
                 <Separator orientation="VERTICAL" prefHeight="20.0" prefWidth="10.0"/>
-                <Label text="0.00"/>
+                <Label fx:id="totalSumInRUBLabel" text="0.00"/>
                 <Separator orientation="VERTICAL" prefHeight="20.0" prefWidth="10.0"/>
                 <Label alignment="CENTER_RIGHT" text="%page.stocksStat.total.title">
                     <font>

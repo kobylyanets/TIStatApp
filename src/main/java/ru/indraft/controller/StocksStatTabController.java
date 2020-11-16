@@ -3,12 +3,15 @@ package ru.indraft.controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.indraft.model.Currency;
 import ru.indraft.model.StockStatFx;
 import ru.indraft.service.StocksStatService;
+import ru.indraft.utils.MoneyUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +33,10 @@ public class StocksStatTabController {
     public TableColumn<StockStatFx, String> nameColumn;
     @FXML
     public TableColumn<StockStatFx, String> profitColumn;
+    @FXML
+    public Label totalSumInUSDLabel;
+    @FXML
+    public Label totalSumInRUBLabel;
 
     @FXML
     private void refresh() {
@@ -51,6 +58,16 @@ public class StocksStatTabController {
     private void loadStocksStat() {
         stocksStat = stocksStatService.getStocksStat();
         populateTable(stocksStat);
+        calcTotalSums();
+    }
+
+    private void calcTotalSums() {
+        var totalSumInUSD =
+                stocksStatService.getTotalSumByCurrency(stocksStat, Currency.USD);
+        totalSumInUSDLabel.setText(MoneyUtils.format(totalSumInUSD, Currency.USD));
+        var totalSumInRUB =
+                stocksStatService.getTotalSumByCurrency(stocksStat, Currency.RUB);
+        totalSumInRUBLabel.setText(MoneyUtils.format(totalSumInRUB, Currency.RUB));
     }
 
     private void populateTable(List<StockStatFx> stocksStat) {

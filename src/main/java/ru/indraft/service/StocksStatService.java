@@ -23,14 +23,6 @@ public class StocksStatService {
     private final InstrumentDao instrumentDao = new InstrumentDao();
     private final OperationDao operationDao = new OperationDao();
 
-    private Set<String> findAllTicketsOfOperations(List<Operation> operations) {
-        return operations.stream()
-                .map(Operation::getInstrument)
-                .filter(Objects::nonNull)
-                .map(Instrument::getTicker)
-                .collect(Collectors.toSet());
-    }
-
     public List<StockStatFx> getStocksStat() {
         var operations = operationDao.queryForAll();
         var stocks = instrumentDao.queryForAll();
@@ -43,6 +35,22 @@ public class StocksStatService {
             }
         });
         return stocksStat;
+    }
+
+    public BigDecimal getTotalSumByCurrency(List<StockStatFx> stocksStat, Currency currency) {
+        return stocksStat.stream()
+                .filter(stockStat -> stockStat.getCurrencyParam() == currency)
+                .map(StockStatFx::getProfitParam)
+                .reduce(BigDecimal.ZERO, BigDecimal::add)
+                .abs();
+    }
+
+    private Set<String> findAllTicketsOfOperations(List<Operation> operations) {
+        return operations.stream()
+                .map(Operation::getInstrument)
+                .filter(Objects::nonNull)
+                .map(Instrument::getTicker)
+                .collect(Collectors.toSet());
     }
 
     private List<Operation> findOperationsByTicker(String ticker, List<Operation> operations) {
