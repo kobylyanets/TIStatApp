@@ -1,7 +1,7 @@
 package ru.indraft.utils;
 
 import org.junit.jupiter.api.Test;
-import ru.indraft.database.model.Currency;
+import ru.indraft.model.Currency;
 
 import java.math.BigDecimal;
 

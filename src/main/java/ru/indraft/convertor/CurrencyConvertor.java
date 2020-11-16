@@ -13,4 +13,13 @@ public class CurrencyConvertor {
         );
     }
 
+    public static ru.indraft.model.Currency toFx(
+            ru.indraft.database.model.Currency currency
+    ) {
+        return convertEnum(
+                ru.indraft.model.Currency.class,
+                currency
+        );
+    }
+
 }

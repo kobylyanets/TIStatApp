@@ -2,11 +2,16 @@ package ru.indraft.model;
 
 import javafx.beans.property.SimpleStringProperty;
 
+import java.math.BigDecimal;
+
 public class StockStatFx {
 
     private final SimpleStringProperty ticker = new SimpleStringProperty();
     private final SimpleStringProperty name = new SimpleStringProperty();
     private final SimpleStringProperty profit = new SimpleStringProperty();
+
+    private Currency currencyParam;
+    private BigDecimal profitParam;
 
     public String getTicker() {
         return ticker.get();
@@ -44,4 +49,19 @@ public class StockStatFx {
         this.profit.set(profit);
     }
 
+    public Currency getCurrencyParam() {
+        return currencyParam;
+    }
+
+    public void setCurrencyParam(Currency currencyParam) {
+        this.currencyParam = currencyParam;
+    }
+
+    public BigDecimal getProfitParam() {
+        return profitParam;
+    }
+
+    public void setProfitParam(BigDecimal profitParam) {
+        this.profitParam = profitParam;
+    }
 }
