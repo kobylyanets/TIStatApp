@@ -125,6 +125,9 @@ public class StocksStatService {
             var stockProfit = getStockProfit(buyOperations, sellOperations);
             stockStat.setProfit(MoneyUtils.format(stockProfit, currency));
             stockStat.setProfitParam(stockProfit);
+            var total = stockProfit.subtract(commission);
+            stockStat.setTotal(MoneyUtils.format(total, currency));
+            stockStat.setTotalParam(total);
             return stockStat;
         }
         return null;

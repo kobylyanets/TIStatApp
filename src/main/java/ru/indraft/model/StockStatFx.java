@@ -12,16 +12,20 @@ public class StockStatFx {
     private final SimpleStringProperty name = new SimpleStringProperty();
     private final SimpleStringProperty commission = new SimpleStringProperty();
     private final SimpleStringProperty profit = new SimpleStringProperty();
+    private final SimpleStringProperty total = new SimpleStringProperty();
 
     @Getter
     @Setter
     private Currency currencyParam;
     @Getter
     @Setter
+    private BigDecimal commissionParam;
+    @Getter
+    @Setter
     private BigDecimal profitParam;
     @Getter
     @Setter
-    private BigDecimal commissionParam;
+    private BigDecimal totalParam;
 
     public String getTicker() {
         return ticker.get();
@@ -69,6 +73,18 @@ public class StockStatFx {
 
     public SimpleStringProperty commissionProperty() {
         return commission;
+    }
+
+    public String getTotal() {
+        return total.get();
+    }
+
+    public void setTotal(String total) {
+        this.total.set(total);
+    }
+
+    public SimpleStringProperty totalProperty() {
+        return total;
     }
 
 }

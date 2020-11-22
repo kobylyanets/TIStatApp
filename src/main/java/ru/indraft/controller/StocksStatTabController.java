@@ -42,6 +42,8 @@ public class StocksStatTabController {
     @FXML
     public TableColumn<StockStatFx, String> profitColumn;
     @FXML
+    public TableColumn<StockStatFx, String> totalColumn;
+    @FXML
     public ToggleGroup tgCurrencyFilter;
     @FXML
     public RadioButton clearCurrencyFilter;
@@ -69,6 +71,7 @@ public class StocksStatTabController {
         nameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         commissionColumn.setCellValueFactory(cellData -> cellData.getValue().commissionProperty());
         profitColumn.setCellValueFactory(cellData -> cellData.getValue().profitProperty());
+        totalColumn.setCellValueFactory(cellData -> cellData.getValue().totalProperty());
     }
 
     private void loadStocksStat() {
