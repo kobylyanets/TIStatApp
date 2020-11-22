@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.VBox?>
@@ -23,33 +24,38 @@
                         <Insets right="20.0"/>
                     </padding>
                 </Label>
-                <RadioButton onAction="#handleRubCurrencyFilter" mnemonicParsing="false"
+                <RadioButton mnemonicParsing="false" onAction="#handleRubCurrencyFilter"
                              text="%page.stocksStat.filter.rub">
                     <toggleGroup>
                         <ToggleGroup fx:id="tgCurrencyFilter"/>
                     </toggleGroup>
                 </RadioButton>
-                <RadioButton onAction="#handleUsdCurrencyFilter" mnemonicParsing="false"
+                <RadioButton mnemonicParsing="false" onAction="#handleUsdCurrencyFilter"
                              text="%page.stocksStat.filter.usd" toggleGroup="$tgCurrencyFilter"/>
-                <RadioButton fx:id="clearCurrencyFilter" onAction="#handleClearCurrencyFilter"
-                             mnemonicParsing="false" selected="true"
-                             text="%page.stocksStat.filter.all"
-                             toggleGroup="$tgCurrencyFilter"/>
+                <RadioButton fx:id="clearCurrencyFilter" mnemonicParsing="false"
+                             onAction="#handleClearCurrencyFilter" selected="true"
+                             text="%page.stocksStat.filter.all" toggleGroup="$tgCurrencyFilter"/>
                 <Separator prefWidth="20.0"/>
+                <TextField fx:id="searchByTickerTextField"
+                           onKeyPressed="#onKeyPressedSearchByTicker" minWidth="80.0"
+                           prefHeight="27.0" prefWidth="115.0"
+                           promptText="%page.stocksStat.searchByTicker.placeholder"/>
+                <Button onAction="#handleSearchByTicker" mnemonicParsing="false"
+                        text="%page.stocksStat.searchByTicker.btn"/>
+                <Separator orientation="VERTICAL" prefWidth="20.0"/>
                 <Button mnemonicParsing="false" onAction="#refresh"
                         text="%page.operationsStat.btn.refresh"/>
             </items>
         </ToolBar>
-        <TableView fx:id="stocksStatTableView" prefHeight="321.0" prefWidth="600.0"
-                   VBox.vgrow="ALWAYS">
+        <TableView fx:id="stocksStatTableView" VBox.vgrow="ALWAYS">
             <columns>
                 <TableColumn fx:id="tickerColumn" editable="false" maxWidth="1.7976931348623157E308"
                              minWidth="80.0" prefWidth="100.0" sortable="false"
                              style="-fx-alignment: CENTER;"
                              text="%page.operationsStat.table.ticker"/>
-                <TableColumn fx:id="nameColumn" editable="false"
-                             maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="250.0"
-                             sortable="false" style="-fx-alignment: CENTER_LEFT;"
+                <TableColumn fx:id="nameColumn" editable="false" maxWidth="1.7976931348623157E308"
+                             minWidth="100.0" prefWidth="250.0" sortable="false"
+                             style="-fx-alignment: CENTER_LEFT;"
                              text="%page.operationsStat.table.instrumentName"/>
                 <TableColumn fx:id="profitColumn" editable="false" maxWidth="1.7976931348623157E308"
                              minWidth="80.0" prefWidth="120.0" sortable="false"

@@ -7,7 +7,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.indraft.model.Currency;
@@ -40,6 +43,8 @@ public class StocksStatTabController {
     public ToggleGroup tgCurrencyFilter;
     @FXML
     public RadioButton clearCurrencyFilter;
+    @FXML
+    public TextField searchByTickerTextField;
     @FXML
     public Label totalSumInUSDLabel;
     @FXML
@@ -105,5 +110,29 @@ public class StocksStatTabController {
     @FXML
     public void handleClearCurrencyFilter() {
         populateTable(stocksStat);
+    }
+
+    private void filterByTicker(List<StockStatFx> stocksStat, String ticker) {
+        var filteredStocksStat = stocksStat.stream()
+                .filter(
+                        stockStat ->
+                                stockStat.getTicker()
+                                        .startsWith(
+                                                ticker.toUpperCase().trim()
+                                        )
+                ).collect(Collectors.toList());
+        populateTable(filteredStocksStat);
+    }
+
+    @FXML
+    public void handleSearchByTicker() {
+        var ticker = searchByTickerTextField.getText();
+        filterByTicker(stocksStat, ticker);
+    }
+
+    public void onKeyPressedSearchByTicker(KeyEvent keyEvent) {
+        if (keyEvent != null && keyEvent.getCode() == KeyCode.ENTER) {
+            handleSearchByTicker();
+        }
     }
 }
