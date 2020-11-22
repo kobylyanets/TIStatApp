@@ -4,15 +4,15 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.BorderPane?>
-<BorderPane fx:id="borderPaneMain" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0"
-            prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1"
+<BorderPane fx:id="borderPaneMain" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0"
+            prefWidth="750.0" xmlns="http://javafx.com/javafx/11.0.1"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="ru.indraft.controller.MainController">
     <top>
         <ToolBar nodeOrientation="LEFT_TO_RIGHT" BorderPane.alignment="CENTER">
             <items>
                 <Button mnemonicParsing="false" text="%page.stat.title"/>
-                <Button mnemonicParsing="false" text="%page.operationsStat.title"/>
+                <Button mnemonicParsing="false" text="%page.stocksStat.title"/>
                 <Separator nodeOrientation="RIGHT_TO_LEFT" orientation="VERTICAL" prefHeight="27.0"
                            prefWidth="8.0"/>
                 <Button mnemonicParsing="false" onAction="#handleSynchronize"

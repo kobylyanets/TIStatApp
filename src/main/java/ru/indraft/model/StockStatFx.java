@@ -1,6 +1,8 @@
 package ru.indraft.model;
 
 import javafx.beans.property.SimpleStringProperty;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 
@@ -8,10 +10,18 @@ public class StockStatFx {
 
     private final SimpleStringProperty ticker = new SimpleStringProperty();
     private final SimpleStringProperty name = new SimpleStringProperty();
+    private final SimpleStringProperty commission = new SimpleStringProperty();
     private final SimpleStringProperty profit = new SimpleStringProperty();
 
+    @Getter
+    @Setter
     private Currency currencyParam;
+    @Getter
+    @Setter
     private BigDecimal profitParam;
+    @Getter
+    @Setter
+    private BigDecimal commissionParam;
 
     public String getTicker() {
         return ticker.get();
@@ -49,19 +59,16 @@ public class StockStatFx {
         this.profit.set(profit);
     }
 
-    public Currency getCurrencyParam() {
-        return currencyParam;
+    public String getCommission() {
+        return commission.get();
     }
 
-    public void setCurrencyParam(Currency currencyParam) {
-        this.currencyParam = currencyParam;
+    public void setCommission(String commission) {
+        this.commission.set(commission);
     }
 
-    public BigDecimal getProfitParam() {
-        return profitParam;
+    public SimpleStringProperty commissionProperty() {
+        return commission;
     }
 
-    public void setProfitParam(BigDecimal profitParam) {
-        this.profitParam = profitParam;
-    }
 }

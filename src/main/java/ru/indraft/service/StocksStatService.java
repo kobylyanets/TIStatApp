@@ -111,6 +111,7 @@ public class StocksStatService {
         var stockOperations = findOperationsByTicker(ticker, operations);
         var buyOperations = filterOperationsByTypes(stockOperations, OperationType.Buy, OperationType.BuyCard);
         var sellOperations = filterOperationsByTypes(stockOperations, OperationType.Sell);
+        var commissionOperations = filterOperationsByTypes(stockOperations, OperationType.BrokerCommission);
         if (isClosedPosition(buyOperations, sellOperations)) {
             var stockStat = new StockStatFx();
             stockStat.setTicker(ticker);
@@ -118,6 +119,9 @@ public class StocksStatService {
             stockStat.setCurrencyParam(currency);
             var stock = getStockByTicker(ticker, stocks);
             stockStat.setName(stock.getName());
+            var commission = getTotalSumOfOperations(commissionOperations);
+            stockStat.setCommission(MoneyUtils.format(commission, currency));
+            stockStat.setCommissionParam(commission);
             var stockProfit = getStockProfit(buyOperations, sellOperations);
             stockStat.setProfit(MoneyUtils.format(stockProfit, currency));
             stockStat.setProfitParam(stockProfit);

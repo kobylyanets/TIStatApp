@@ -36,31 +36,34 @@
                              onAction="#handleClearCurrencyFilter" selected="true"
                              text="%page.stocksStat.filter.all" toggleGroup="$tgCurrencyFilter"/>
                 <Separator prefWidth="20.0"/>
-                <TextField fx:id="searchByTickerTextField"
-                           onKeyPressed="#onKeyPressedSearchByTicker" minWidth="80.0"
-                           prefHeight="27.0" prefWidth="115.0"
+                <TextField fx:id="searchByTickerTextField" minWidth="80.0"
+                           onKeyPressed="#onKeyPressedSearchByTicker" prefHeight="27.0"
+                           prefWidth="115.0"
                            promptText="%page.stocksStat.searchByTicker.placeholder"/>
-                <Button onAction="#handleSearchByTicker" mnemonicParsing="false"
+                <Button mnemonicParsing="false" onAction="#handleSearchByTicker"
                         text="%page.stocksStat.searchByTicker.btn"/>
                 <Separator orientation="VERTICAL" prefWidth="20.0"/>
                 <Button mnemonicParsing="false" onAction="#refresh"
-                        text="%page.operationsStat.btn.refresh"/>
+                        text="%page.stocksStat.btn.refresh"/>
             </items>
         </ToolBar>
         <TableView fx:id="stocksStatTableView" VBox.vgrow="ALWAYS">
             <columns>
                 <TableColumn fx:id="tickerColumn" editable="false" maxWidth="1.7976931348623157E308"
                              minWidth="80.0" prefWidth="100.0" sortable="false"
-                             style="-fx-alignment: CENTER;"
-                             text="%page.operationsStat.table.ticker"/>
+                             style="-fx-alignment: CENTER;" text="%page.stocksStat.table.ticker"/>
                 <TableColumn fx:id="nameColumn" editable="false" maxWidth="1.7976931348623157E308"
                              minWidth="100.0" prefWidth="250.0" sortable="false"
                              style="-fx-alignment: CENTER_LEFT;"
-                             text="%page.operationsStat.table.instrumentName"/>
+                             text="%page.stocksStat.table.instrumentName"/>
+                <TableColumn fx:id="commissionColumn" editable="false"
+                             maxWidth="1.7976931348623157E308" minWidth="80.0" prefWidth="120.0"
+                             sortable="false" style="-fx-alignment: CENTER_RIGHT;"
+                             text="%page.stocksStat.table.commission"/>
                 <TableColumn fx:id="profitColumn" editable="false" maxWidth="1.7976931348623157E308"
                              minWidth="80.0" prefWidth="120.0" sortable="false"
                              style="-fx-alignment: CENTER_RIGHT;"
-                             text="%page.operationsStat.table.profit"/>
+                             text="%page.stocksStat.table.profit"/>
             </columns>
             <opaqueInsets>
                 <Insets/>
