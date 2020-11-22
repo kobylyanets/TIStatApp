@@ -42,7 +42,7 @@ public class App extends Application {
             scene = new Scene(borderPane);
         }
         stage.setScene(scene);
-        stage.setTitle(LocaleService.getInstance().get("page.stat.title"));
+        stage.setTitle(LocaleService.getInstance().get("app.title"));
         stage.setOnCloseRequest(windowEvent -> {
             LOGGER.trace("close app");
             Platform.exit();
