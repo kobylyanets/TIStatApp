@@ -4,8 +4,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.ToggleGroup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.indraft.model.Currency;
@@ -15,6 +17,7 @@ import ru.indraft.utils.MoneyUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class StocksStatTabController {
 
@@ -34,12 +37,17 @@ public class StocksStatTabController {
     @FXML
     public TableColumn<StockStatFx, String> profitColumn;
     @FXML
+    public ToggleGroup tgCurrencyFilter;
+    @FXML
+    public RadioButton clearCurrencyFilter;
+    @FXML
     public Label totalSumInUSDLabel;
     @FXML
     public Label totalSumInRUBLabel;
 
     @FXML
     private void refresh() {
+        clearCurrencyFilter.setSelected(true);
         loadStocksStat();
     }
 
@@ -76,4 +84,26 @@ public class StocksStatTabController {
         stocksStatTableView.setItems(stocksStatFxObservableList);
     }
 
+    private List<StockStatFx> filterByCurrency(List<StockStatFx> stocksStat, Currency currency) {
+        return stocksStat.stream()
+                .filter(stockStat -> stockStat.getCurrencyParam() == currency)
+                .collect(Collectors.toList());
+    }
+
+    @FXML
+    public void handleRubCurrencyFilter() {
+        var rubStocksStat = filterByCurrency(stocksStat, Currency.RUB);
+        populateTable(rubStocksStat);
+    }
+
+    @FXML
+    public void handleUsdCurrencyFilter() {
+        var usdStocksStat = filterByCurrency(stocksStat, Currency.USD);
+        populateTable(usdStocksStat);
+    }
+
+    @FXML
+    public void handleClearCurrencyFilter() {
+        populateTable(stocksStat);
+    }
 }

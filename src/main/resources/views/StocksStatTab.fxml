@@ -23,13 +23,17 @@
                         <Insets right="20.0"/>
                     </padding>
                 </Label>
-                <RadioButton mnemonicParsing="false" text="%page.stocksStat.filter.rub">
+                <RadioButton onAction="#handleRubCurrencyFilter" mnemonicParsing="false"
+                             text="%page.stocksStat.filter.rub">
                     <toggleGroup>
                         <ToggleGroup fx:id="tgCurrencyFilter"/>
                     </toggleGroup>
                 </RadioButton>
-                <RadioButton mnemonicParsing="false" text="%page.stocksStat.filter.usd" toggleGroup="$tgCurrencyFilter"/>
-                <RadioButton mnemonicParsing="false" selected="true" text="%page.stocksStat.filter.all"
+                <RadioButton onAction="#handleUsdCurrencyFilter" mnemonicParsing="false"
+                             text="%page.stocksStat.filter.usd" toggleGroup="$tgCurrencyFilter"/>
+                <RadioButton fx:id="clearCurrencyFilter" onAction="#handleClearCurrencyFilter"
+                             mnemonicParsing="false" selected="true"
+                             text="%page.stocksStat.filter.all"
                              toggleGroup="$tgCurrencyFilter"/>
                 <Separator prefWidth="20.0"/>
                 <Button mnemonicParsing="false" onAction="#refresh"
