@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class StocksStatTabController {
+public class StocksStatTabController implements IPageController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(StocksStatTabController.class);
 
@@ -55,7 +55,8 @@ public class StocksStatTabController {
     public Label totalSumInRUBLabel;
 
     @FXML
-    private void refresh() {
+    public void refresh() {
+        LOGGER.info("REFRESH {}", System.currentTimeMillis());
         clearCurrencyFilter.setSelected(true);
         loadStocksStat();
     }

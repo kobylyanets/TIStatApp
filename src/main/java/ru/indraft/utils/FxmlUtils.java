@@ -22,4 +22,17 @@ public class FxmlUtils {
         }
         return null;
     }
+
+    public static FXMLLoader getLoader(String pathToView) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(FxmlUtils.class.getResource(pathToView));
+            loader.setResources(LocaleService.getInstance().getResourceBundle());
+            return loader;
+        } catch (Exception e) {
+            LOGGER.error(e.getLocalizedMessage());
+        }
+        return null;
+    }
+
 }
