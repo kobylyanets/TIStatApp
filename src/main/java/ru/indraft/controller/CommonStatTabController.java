@@ -15,7 +15,7 @@ import ru.indraft.service.LocaleService;
 
 import java.util.List;
 
-public class CommonStatTabController {
+public class CommonStatTabController implements IPageController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CommonStatTabController.class);
 
@@ -45,7 +45,7 @@ public class CommonStatTabController {
     }
 
     @FXML
-    private void refresh() {
+    public void refresh() {
         loadCommonStat();
     }
 
