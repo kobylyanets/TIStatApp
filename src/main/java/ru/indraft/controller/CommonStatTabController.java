@@ -10,8 +10,10 @@ import org.slf4j.LoggerFactory;
 import ru.indraft.database.dao.OperationDao;
 import ru.indraft.database.model.Operation;
 import ru.indraft.model.CommonStatFx;
+import ru.indraft.model.Currency;
 import ru.indraft.service.CommonStatService;
 import ru.indraft.service.LocaleService;
+import ru.indraft.utils.MoneyUtils;
 
 import java.util.List;
 
@@ -38,8 +40,7 @@ public class CommonStatTabController implements IPageController {
         commonStatFxObservableList.clear();
         CommonStatFx marginCommission = new CommonStatFx();
         marginCommission.setParameter(LocaleService.getInstance().get("page.stat.table.parameter.marginCommission"));
-        // TODO: Add MoneyFormatter
-        marginCommission.setValue(CommonStatService.getMarginCommissionSum(operations).toString());
+        marginCommission.setValue(MoneyUtils.format(CommonStatService.getMarginCommissionSum(operations), Currency.RUB));
         commonStatFxObservableList.add(marginCommission);
         statTableView.setItems(commonStatFxObservableList);
     }

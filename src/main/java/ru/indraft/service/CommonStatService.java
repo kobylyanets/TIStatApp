@@ -9,12 +9,13 @@ import java.util.Objects;
 
 public class CommonStatService {
 
-    public static Double getMarginCommissionSum(List<Operation> operations) {
+    public static BigDecimal getMarginCommissionSum(List<Operation> operations) {
         return operations.stream()
                 .filter(operation -> operation.getOperationType() == OperationType.MarginCommission)
                 .map(Operation::getPayment)
                 .filter(Objects::nonNull)
-                .reduce(BigDecimal.ZERO, BigDecimal::add).doubleValue();
+                .reduce(BigDecimal.ZERO, BigDecimal::add)
+                .abs();
     }
 
 }
