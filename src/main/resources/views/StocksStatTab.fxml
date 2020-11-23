@@ -42,9 +42,6 @@
                            promptText="%page.stocksStat.searchByTicker.placeholder"/>
                 <Button mnemonicParsing="false" onAction="#handleSearchByTicker"
                         text="%page.stocksStat.searchByTicker.btn"/>
-                <Separator orientation="VERTICAL" prefWidth="20.0"/>
-                <Button mnemonicParsing="false" onAction="#refresh"
-                        text="%page.stocksStat.btn.refresh"/>
             </items>
         </ToolBar>
         <TableView fx:id="stocksStatTableView" VBox.vgrow="ALWAYS">
