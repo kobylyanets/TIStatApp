@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.indraft.database.model.Instrument;
 
-import java.math.RoundingMode;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,10 +28,17 @@ public class OperationConvertor {
      * поэтому вычисляем правильнок количество позиций делением общей суммы на цену бумаги.
      *
      * @link https://github.com/TinkoffCreditSystems/invest-openapi-java-sdk/issues/107
+     *
+     * Это не совсем дефект.
+     * В Operation.quantity хранится число акций в лимитной заявки, а не количество проданных акций.
+     * Точное количество можно вычислить по массиву Trades (сделок) в рамках операции. Что мы и делаем.
+     * Старый вариант вычисления деления суммы сделки на цену бумаги вызывает коллизии, когда в лоте более 100000 акций.
+     * Такое происходит с VTBR тикером (Возможно Тинькофф банк в свою сторону округляет и берет себе доп. деньги).
      */
     private static Integer calcQuantity(ru.tinkoff.invest.openapi.models.operations.Operation operation) {
-        if (operation.price != null) {
-            return operation.payment.divide(operation.price, 0, RoundingMode.HALF_UP).abs().intValue();
+        if (operation.trades != null && operation.trades.size() > 0) {
+            var trades = operation.trades;
+            return trades.stream().map(trade -> trade.quantity).reduce(0, Integer::sum);
         }
         return null;
     }
