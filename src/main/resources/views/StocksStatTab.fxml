@@ -57,6 +57,10 @@
                              maxWidth="1.7976931348623157E308" minWidth="80.0" prefWidth="120.0"
                              sortable="false" style="-fx-alignment: CENTER_RIGHT;"
                              text="%page.stocksStat.table.commission"/>
+                <TableColumn fx:id="dividendColumn" editable="false"
+                             maxWidth="1.7976931348623157E308" minWidth="80.0" prefWidth="120.0"
+                             sortable="false" style="-fx-alignment: CENTER_RIGHT;"
+                             text="%page.stocksStat.table.dividend"/>
                 <TableColumn fx:id="profitColumn" editable="false" maxWidth="1.7976931348623157E308"
                              minWidth="80.0" prefWidth="120.0" sortable="false"
                              style="-fx-alignment: CENTER_RIGHT;"

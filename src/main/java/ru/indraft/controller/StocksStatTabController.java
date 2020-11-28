@@ -40,6 +40,8 @@ public class StocksStatTabController implements IPageController {
     @FXML
     public TableColumn<StockStatFx, String> commissionColumn;
     @FXML
+    public TableColumn<StockStatFx, String> dividendColumn;
+    @FXML
     public TableColumn<StockStatFx, String> profitColumn;
     @FXML
     public TableColumn<StockStatFx, String> totalColumn;
@@ -71,6 +73,7 @@ public class StocksStatTabController implements IPageController {
         tickerColumn.setCellValueFactory(cellData -> cellData.getValue().tickerProperty());
         nameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         commissionColumn.setCellValueFactory(cellData -> cellData.getValue().commissionProperty());
+        dividendColumn.setCellValueFactory(cellData -> cellData.getValue().dividendProperty());
         profitColumn.setCellValueFactory(cellData -> cellData.getValue().profitProperty());
         totalColumn.setCellValueFactory(cellData -> cellData.getValue().totalProperty());
     }

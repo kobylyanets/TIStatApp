@@ -11,6 +11,7 @@ public class StockStatFx {
     private final SimpleStringProperty ticker = new SimpleStringProperty();
     private final SimpleStringProperty name = new SimpleStringProperty();
     private final SimpleStringProperty commission = new SimpleStringProperty();
+    private final SimpleStringProperty dividend = new SimpleStringProperty();
     private final SimpleStringProperty profit = new SimpleStringProperty();
     private final SimpleStringProperty total = new SimpleStringProperty();
 
@@ -20,6 +21,9 @@ public class StockStatFx {
     @Getter
     @Setter
     private BigDecimal commissionParam;
+    @Getter
+    @Setter
+    private BigDecimal dividendParam;
     @Getter
     @Setter
     private BigDecimal profitParam;
@@ -85,6 +89,18 @@ public class StockStatFx {
 
     public SimpleStringProperty totalProperty() {
         return total;
+    }
+
+    public String getDividend() {
+        return dividend.get();
+    }
+
+    public void setDividend(String dividend) {
+        this.dividend.set(dividend);
+    }
+
+    public SimpleStringProperty dividendProperty() {
+        return dividend;
     }
 
 }
