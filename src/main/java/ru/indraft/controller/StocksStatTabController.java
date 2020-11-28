@@ -5,12 +5,15 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
+import javafx.util.Callback;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.indraft.model.Currency;
@@ -76,6 +79,23 @@ public class StocksStatTabController implements IPageController {
         dividendColumn.setCellValueFactory(cellData -> cellData.getValue().dividendProperty());
         profitColumn.setCellValueFactory(cellData -> cellData.getValue().profitProperty());
         totalColumn.setCellValueFactory(cellData -> cellData.getValue().totalProperty());
+        totalColumn.setCellFactory(new Callback<>() {
+            @Override
+            public TableCell<StockStatFx, String> call(TableColumn<StockStatFx, String> stockStatFxStringTableColumn) {
+                return new TableCell<>() {
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (!isEmpty()) {
+                            // this.setTextFill(Color.GREEN);
+                            if (item.startsWith("-"))
+                                this.setTextFill(Color.RED);
+                            setText(item);
+                        }
+                    }
+                };
+            }
+        });
     }
 
     private void loadStocksStat() {
