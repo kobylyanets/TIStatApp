@@ -7,14 +7,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.indraft.database.dao.OperationDao;
-import ru.indraft.database.model.Operation;
 import ru.indraft.model.CommonStatFx;
-import ru.indraft.model.Currency;
-import ru.indraft.service.CommonStatService;
-import ru.indraft.service.LocaleService;
-import ru.indraft.utils.MoneyUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CommonStatTabController implements IPageController {
@@ -22,6 +17,7 @@ public class CommonStatTabController implements IPageController {
     private static final Logger LOGGER = LoggerFactory.getLogger(CommonStatTabController.class);
 
     private final ObservableList<CommonStatFx> commonStatFxObservableList = FXCollections.observableArrayList();
+    private final List<CommonStatFx> commonStat = new ArrayList<>();
 
     @FXML
     private TableView<CommonStatFx> statTableView;
@@ -35,18 +31,12 @@ public class CommonStatTabController implements IPageController {
     public TableColumn<CommonStatFx, String> valueInEurColumn;
 
     private void loadCommonStat() {
-        var dao = new OperationDao();
-        var operations = dao.queryForAll();
-        LOGGER.info("MARGIN COMMISSION: {}", CommonStatService.getMarginCommissionSum(operations));
-        populateTable(operations);
+        populateTable(commonStat);
     }
 
-    private void populateTable(List<Operation> operations) {
+    private void populateTable(List<CommonStatFx> commonStat) {
         commonStatFxObservableList.clear();
-        CommonStatFx marginCommission = new CommonStatFx();
-        marginCommission.setParameter(LocaleService.getInstance().get("page.stat.table.parameter.marginCommission"));
-        marginCommission.setValue(MoneyUtils.format(CommonStatService.getMarginCommissionSum(operations), Currency.RUB));
-        commonStatFxObservableList.add(marginCommission);
+        commonStatFxObservableList.addAll(commonStat);
         statTableView.setItems(commonStatFxObservableList);
     }
 
@@ -62,9 +52,9 @@ public class CommonStatTabController implements IPageController {
 
     private void initColumns() {
         parameterColumn.setCellValueFactory(cellData -> cellData.getValue().parameterProperty());
-        valueInRubColumn.setCellValueFactory(cellData -> cellData.getValue().valueProperty());
-        valueInUsdColumn.setCellValueFactory(cellData -> cellData.getValue().valueProperty());
-        valueInEurColumn.setCellValueFactory(cellData -> cellData.getValue().valueProperty());
+        valueInRubColumn.setCellValueFactory(cellData -> cellData.getValue().valueInRubProperty());
+        valueInUsdColumn.setCellValueFactory(cellData -> cellData.getValue().valueInUsdProperty());
+        valueInEurColumn.setCellValueFactory(cellData -> cellData.getValue().valueInEurProperty());
     }
 
 }
