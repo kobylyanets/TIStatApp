@@ -13,17 +13,16 @@
     <top>
         <ToolBar nodeOrientation="LEFT_TO_RIGHT" BorderPane.alignment="CENTER">
             <items>
-                <ToggleButton onAction="#handleGoToCommonStatPage" focusTraversable="false"
-                              maxWidth="100.0" minWidth="100.0" mnemonicParsing="false"
-                              text="%page.stat.title">
+                <ToggleButton focusTraversable="false" maxWidth="100.0" minWidth="100.0"
+                              mnemonicParsing="false" onAction="#handleGoToCommonStatPage"
+                              selected="true" text="%page.stat.title">
                     <toggleGroup>
                         <ToggleGroup fx:id="navigationToggleGroup"/>
                     </toggleGroup>
                 </ToggleButton>
-                <ToggleButton onAction="#handleGoToStockStatPage" focusTraversable="false"
-                              maxWidth="100.0" minWidth="100.0" mnemonicParsing="false"
-                              selected="true" text="%page.stocksStat.title"
-                              toggleGroup="$navigationToggleGroup"/>
+                <ToggleButton focusTraversable="false" maxWidth="100.0" minWidth="100.0"
+                              mnemonicParsing="false" onAction="#handleGoToStockStatPage"
+                              text="%page.stocksStat.title" toggleGroup="$navigationToggleGroup"/>
                 <Separator orientation="VERTICAL" prefWidth="15.0"/>
                 <Button focusTraversable="false" mnemonicParsing="false"
                         onAction="#handleSynchronize" text="%settings.button.title"/>
