@@ -34,10 +34,14 @@ public class MainController {
         childController.refresh();
     }
 
+    private String getStartPage() {
+        return COMMON_STAT_PAGE_PATH;
+    }
+
     public void initialize() {
         LOGGER.trace("Initialize Main Controller");
         JavaFXUtils.get().addAlwaysOneSelectedSupport(navigationToggleGroup);
-        goToPage(STOCK_STAT_PAGE_PATH);
+        goToPage(getStartPage());
     }
 
     private void goToPage(String pathToView) {
