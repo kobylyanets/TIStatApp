@@ -14,12 +14,19 @@
         </ToolBar>
         <TableView fx:id="statTableView" VBox.vgrow="ALWAYS">
             <columns>
-                <TableColumn fx:id="parameterColumn" editable="false" maxWidth="-1.0"
-                             minWidth="350.0" prefWidth="-1.0" sortable="false"
-                             text="%page.stat.table.column.parameter"/>
-                <TableColumn fx:id="valueColumn" editable="false" maxWidth="-1.0" minWidth="250.0"
-                             prefWidth="-1.0" sortable="false"
-                             text="%page.stat.table.column.value"/>
+                <TableColumn fx:id="parameterColumn" editable="false"
+                             maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="300.0"
+                             sortable="false" text="%page.stat.table.column.parameter"/>
+                <TableColumn fx:id="valueInRubColumn" editable="false"
+                             maxWidth="1.7976931348623157E308"
+                             minWidth="80.0" prefWidth="180.0" sortable="false"
+                             text="%page.stat.table.column.valueInRub"/>
+                <TableColumn fx:id="valueInUsdColumn" maxWidth="1.7976931348623157E308"
+                             minWidth="80.0" prefWidth="180.0"
+                             text="%page.stat.table.column.valueInUsd"/>
+                <TableColumn fx:id="valueInEurColumn" maxWidth="1.7976931348623157E308"
+                             minWidth="80.0" prefWidth="180.0"
+                             text="%page.stat.table.column.valueInEur"/>
             </columns>
             <opaqueInsets>
                 <Insets/>

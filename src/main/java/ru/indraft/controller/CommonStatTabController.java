@@ -22,12 +22,17 @@ public class CommonStatTabController implements IPageController {
     private static final Logger LOGGER = LoggerFactory.getLogger(CommonStatTabController.class);
 
     private final ObservableList<CommonStatFx> commonStatFxObservableList = FXCollections.observableArrayList();
+
     @FXML
     private TableView<CommonStatFx> statTableView;
     @FXML
     private TableColumn<CommonStatFx, String> parameterColumn;
     @FXML
-    private TableColumn<CommonStatFx, String> valueColumn;
+    public TableColumn<CommonStatFx, String> valueInRubColumn;
+    @FXML
+    public TableColumn<CommonStatFx, String> valueInUsdColumn;
+    @FXML
+    public TableColumn<CommonStatFx, String> valueInEurColumn;
 
     private void loadCommonStat() {
         var dao = new OperationDao();
@@ -57,7 +62,9 @@ public class CommonStatTabController implements IPageController {
 
     private void initColumns() {
         parameterColumn.setCellValueFactory(cellData -> cellData.getValue().parameterProperty());
-        valueColumn.setCellValueFactory(cellData -> cellData.getValue().valueProperty());
+        valueInRubColumn.setCellValueFactory(cellData -> cellData.getValue().valueProperty());
+        valueInUsdColumn.setCellValueFactory(cellData -> cellData.getValue().valueProperty());
+        valueInEurColumn.setCellValueFactory(cellData -> cellData.getValue().valueProperty());
     }
 
 }
