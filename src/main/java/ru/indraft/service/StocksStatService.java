@@ -40,7 +40,7 @@ public class StocksStatService {
     public BigDecimal getTotalSumByCurrency(List<StockStatFx> stocksStat, Currency currency) {
         return stocksStat.stream()
                 .filter(stockStat -> stockStat.getCurrencyParam() == currency)
-                .map(StockStatFx::getProfitParam)
+                .map(StockStatFx::getTotalParam)
                 .reduce(BigDecimal.ZERO, BigDecimal::add)
                 .abs();
     }
