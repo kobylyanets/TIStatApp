@@ -8,6 +8,7 @@ import javafx.scene.control.TableView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.indraft.model.CommonStatFx;
+import ru.indraft.service.CommonStatService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,9 @@ public class CommonStatTabController implements IPageController {
     private static final Logger LOGGER = LoggerFactory.getLogger(CommonStatTabController.class);
 
     private final ObservableList<CommonStatFx> commonStatFxObservableList = FXCollections.observableArrayList();
-    private final List<CommonStatFx> commonStat = new ArrayList<>();
+
+    private final CommonStatService commonStatService = new CommonStatService();
+    private List<CommonStatFx> commonStat = new ArrayList<>();
 
     @FXML
     private TableView<CommonStatFx> statTableView;
@@ -31,6 +34,7 @@ public class CommonStatTabController implements IPageController {
     public TableColumn<CommonStatFx, String> valueInEurColumn;
 
     private void loadCommonStat() {
+        commonStat = commonStatService.getCommonStat();
         populateTable(commonStat);
     }
 
