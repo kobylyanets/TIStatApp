@@ -86,12 +86,12 @@ public class StocksStatTabController implements IPageController {
                     @Override
                     public void updateItem(String item, boolean empty) {
                         super.updateItem(item, empty);
-                        if (!isEmpty()) {
-                            // this.setTextFill(Color.GREEN);
+                        if (!empty) {
+                            this.setTextFill(Color.GREEN);
                             if (item.startsWith("-"))
                                 this.setTextFill(Color.RED);
-                            setText(item);
                         }
+                        setText(item);
                     }
                 };
             }
