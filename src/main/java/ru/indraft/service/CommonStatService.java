@@ -9,6 +9,7 @@ import ru.indraft.model.CommonStatFx;
 import ru.indraft.utils.MoneyUtils;
 import ru.indraft.utils.OperationUtils;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,13 +24,16 @@ public class CommonStatService {
         var commonStat = new ArrayList<CommonStatFx>();
         addMarginalCommission(commonStat, operations);
         addServiceCommission(commonStat, operations);
+        addDividendRow(commonStat, operations);
+        addPayInRow(commonStat, operations);
+        addPayOutRow(commonStat, operations);
         return commonStat;
     }
 
-    private void addTotalQuantityRow(List<CommonStatFx> commonStat, List<Operation> operations) {
-        var totalQuantity = OperationUtils.getTotalQuantityOfOperations(operations);
-        var commonStatRow = new CommonStatFx();
-    }
+//    private void addTotalQuantityRow(List<CommonStatFx> commonStat, List<Operation> operations) {
+//        var totalQuantity = OperationUtils.getTotalQuantityOfOperations(operations);
+//        var commonStatRow = new CommonStatFx();
+//    }
 
     private void addMarginalCommission(List<CommonStatFx> commonStat, List<Operation> operations) {
         var marginCommissionOperations =
@@ -84,5 +88,60 @@ public class CommonStatService {
         );
         commonStat.add(commonStatRow);
     }
+
+    private void setCommonStatRowValues(CommonStatFx commonStatFx, BigDecimal rubValue, BigDecimal usdValue, BigDecimal eurValue) {
+        commonStatFx.setValueInRub(MoneyUtils.format(
+                rubValue,
+                ru.indraft.model.Currency.RUB
+        ));
+        commonStatFx.setValueInUsd(MoneyUtils.format(
+                usdValue,
+                ru.indraft.model.Currency.USD
+        ));
+        commonStatFx.setValueInEur(MoneyUtils.format(
+                eurValue,
+                ru.indraft.model.Currency.EUR
+        ));
+    }
+
+    private void addDividendRow(List<CommonStatFx> commonStat, List<Operation> operations) {
+        var dividendOperations = OperationUtils.filterOperationsByTypes(operations, OperationType.Dividend);
+        var commonStatRow = new CommonStatFx();
+        commonStatRow.setParameter(LocaleService.getInstance().get("page.stat.table.parameter.dividendCommission"));
+        setCommonStatRowValues(
+                commonStatRow,
+                OperationUtils.getTotalPaymentOfOperationsByCurrency(dividendOperations, Currency.RUB),
+                OperationUtils.getTotalPaymentOfOperationsByCurrency(dividendOperations, Currency.USD),
+                OperationUtils.getTotalPaymentOfOperationsByCurrency(dividendOperations, Currency.EUR)
+        );
+        commonStat.add(commonStatRow);
+    }
+
+    private void addPayInRow(List<CommonStatFx> commonStat, List<Operation> operations) {
+        var filteredOperations = OperationUtils.filterOperationsByTypes(operations, OperationType.PayIn);
+        var commonStatRow = new CommonStatFx();
+        commonStatRow.setParameter(LocaleService.getInstance().get("page.stat.table.parameter.payIn"));
+        setCommonStatRowValues(
+                commonStatRow,
+                OperationUtils.getTotalPaymentOfOperationsByCurrency(filteredOperations, Currency.RUB),
+                OperationUtils.getTotalPaymentOfOperationsByCurrency(filteredOperations, Currency.USD),
+                OperationUtils.getTotalPaymentOfOperationsByCurrency(filteredOperations, Currency.EUR)
+        );
+        commonStat.add(commonStatRow);
+    }
+
+    private void addPayOutRow(List<CommonStatFx> commonStat, List<Operation> operations) {
+        var filteredOperations = OperationUtils.filterOperationsByTypes(operations, OperationType.PayOut);
+        var commonStatRow = new CommonStatFx();
+        commonStatRow.setParameter(LocaleService.getInstance().get("page.stat.table.parameter.payOut"));
+        setCommonStatRowValues(
+                commonStatRow,
+                OperationUtils.getTotalPaymentOfOperationsByCurrency(filteredOperations, Currency.RUB),
+                OperationUtils.getTotalPaymentOfOperationsByCurrency(filteredOperations, Currency.USD),
+                OperationUtils.getTotalPaymentOfOperationsByCurrency(filteredOperations, Currency.EUR)
+        );
+        commonStat.add(commonStatRow);
+    }
+
 
 }
